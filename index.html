@@ -4,5 +4,29 @@
 </head>
 <body>
   <p>ようこそ！！！！！！</p>
+  <code>
+
+SELECT
+	obj.name [テーブル名]
+	, col.name [カラム名]
+	, typ.name [型名]
+	, col.max_length [最大桁数]
+	, col.precision [有効桁数]
+	, col.scale [小数点以下桁数]
+	, col.is_nullable [Null許可]
+FROM
+	sys.objects obj
+	INNER JOIN sys.columns col
+	ON obj.object_id = col.object_id
+	INNER JOIN sys.types typ
+	ON col.user_type_id = typ.user_type_id
+WHERE
+	-- U = テーブル (ユーザー定義) 
+	obj.type = 'U'
+ORDER BY
+	obj.name
+	, col.column_id    
+    
+  </code>
 </body>
 </html>
